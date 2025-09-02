@@ -5,326 +5,246 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Progress } from '@/components/ui/progress'
 import Icon from '@/components/ui/icon'
 
 const Index = () => {
-  const [onlineCount] = useState(1247)
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-
-  const topPlayers = [
-    { name: 'DragonSlayer', level: 89, coins: 15420 },
-    { name: 'MineKing', level: 76, coins: 12890 },
-    { name: 'CraftMaster', level: 72, coins: 11560 },
-    { name: 'BlockBuilder', level: 68, coins: 10230 },
-    { name: 'RedstoneWiz', level: 65, coins: 9840 }
-  ]
-
-  const shopItems = [
-    { name: 'VIP статус', price: 299, description: 'Эксклюзивные привилегии на 30 дней' },
-    { name: 'Алмазный набор', price: 150, description: 'Полный сет алмазной брони и оружия' },
-    { name: 'Дом мечты', price: 500, description: 'Готовый дом с мебелью' },
-    { name: '1000 монет', price: 99, description: 'Игровая валюта сервера' }
+  const [onlineCount] = useState(0)
+  const [totalPlayers] = useState(376)
+  const [maxPlayers] = useState(500)
+  
+  const servers = [
+    { name: 'Выживание', online: 156, version: '1.20.4', status: 'online' },
+    { name: 'Креатив', online: 89, version: '1.20.4', status: 'online' },
+    { name: 'Мини-игры', online: 131, version: '1.20.4', status: 'online' },
+    { name: 'Анархия', online: 0, version: '1.20.4', status: 'maintenance' }
   ]
 
   const news = [
-    { title: 'Обновление 2.1: Новые биомы!', date: '28.08.2024', excerpt: 'Добавили 5 новых биомов с уникальными мобами и ресурсами.' },
-    { title: 'Турнир строителей', date: '25.08.2024', excerpt: 'Приз 5000 монет лучшему архитектору!' },
-    { title: 'Техработы завершены', date: '22.08.2024', excerpt: 'Сервер работает стабильно, лаги устранены.' }
+    { title: 'Открыт новый сервер Анархия', date: '01.09.2024', excerpt: 'Полная свобода действий без правил и ограничений' },
+    { title: 'Турнир строителей стартовал!', date: '28.08.2024', excerpt: 'Главный приз 10.000 рублей' },
+    { title: 'Обновление до версии 1.20.4', date: '25.08.2024', excerpt: 'Новые блоки и улучшения производительности' }
+  ]
+
+  const features = [
+    { icon: 'Shield', title: 'Защита территорий', desc: 'Приватные регионы' },
+    { icon: 'Coins', title: 'Экономика', desc: 'Торговля и аукционы' },
+    { icon: 'Users', title: 'Кланы', desc: 'Объединяйтесь в группы' },
+    { icon: 'Zap', title: 'События', desc: 'Ежедневные квесты' }
   ]
 
   return (
-    <div className="min-h-screen bg-minecraft-gray">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <div className="text-2xl font-bold text-minecraft-blue">CRAFTWORLD</div>
-              <Badge variant="secondary" className="bg-minecraft-green text-white">
-                <Icon name="Users" size={14} className="mr-1" />
-                {onlineCount} онлайн
-              </Badge>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center opacity-20 z-0"
+        style={{
+          backgroundImage: `url('/img/14235551-d229-4b1e-b5ca-25977c87e6a2.jpg')`
+        }}
+      />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Header */}
+        <header className="border-b border-slate-700/50 bg-slate-900/80 backdrop-blur-sm">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <div className="flex items-center space-x-4">
+                <Button variant="ghost" size="sm" className="text-red-500 hover:bg-red-500/10 p-2">
+                  <Icon name="Menu" size={20} />
+                </Button>
+                <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center">
+                  <Icon name="Gamepad2" size={24} className="text-white" />
+                </div>
+              </div>
+              
+              <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg">
+                <Icon name="Download" size={16} className="mr-2" />
+                Скачать лаунчер
+              </Button>
             </div>
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <section className="py-20 text-center text-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
+              McGround -<br />
+              Комплекс<br />
+              серверов<br />
+              Minecraft
+            </h1>
             
-            <nav className="hidden md:flex space-x-8">
-              {['Главная', 'Правила', 'Новости', 'Форум', 'Статистика'].map((item) => (
-                <a key={item} href="#" className="text-minecraft-darkgray hover:text-minecraft-green transition-colors story-link">
-                  {item}
-                </a>
-              ))}
-            </nav>
+            <p className="text-xl text-slate-300 mb-12">
+              На пути истины
+            </p>
 
-            <Button className="bg-minecraft-green hover:bg-minecraft-green/90 text-white">
-              <Icon name="Download" size={16} className="mr-2" />
-              Скачать
-            </Button>
-          </div>
-        </div>
-      </header>
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-8 md:gap-16 mb-12">
+              <div>
+                <div className="flex items-center justify-center mb-2">
+                  <div className="w-3 h-3 bg-red-500 rounded-full mr-3"></div>
+                  <span className="text-slate-400 text-lg">В ИГРЕ</span>
+                </div>
+                <div className="text-6xl font-bold text-white">{onlineCount}</div>
+              </div>
+              <div>
+                <div className="flex items-center justify-center mb-2">
+                  <div className="w-3 h-3 bg-red-500 rounded-full mr-3"></div>
+                  <span className="text-slate-400 text-lg">ВСЕГО</span>
+                </div>
+                <div className="text-6xl font-bold text-white">{totalPlayers}</div>
+              </div>
+            </div>
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-minecraft-blue to-minecraft-darkgray text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold mb-6 animate-fade-in">
-            ДОБРО ПОЖАЛОВАТЬ НА CRAFTWORLD
-          </h1>
-          <p className="text-xl mb-8 text-white/90 animate-fade-in">
-            Лучший Minecraft сервер с уникальными мирами, дружелюбным сообществом и захватывающими приключениями
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-scale-in">
-            <Button size="lg" className="bg-minecraft-green hover:bg-minecraft-green/90 text-white px-8 py-3">
-              <Icon name="Play" size={20} className="mr-2" />
-              НАЧАТЬ ИГРУ
+            <Button className="bg-red-600 hover:bg-red-700 text-white px-12 py-4 text-lg rounded-lg mb-4">
+              <Icon name="Download" size={20} className="mr-3" />
+              СКАЧАТЬ ЛАУНЧЕР
             </Button>
-            <div className="text-sm text-white/80">
-              IP: craftworld.server.com
+
+            <div className="text-slate-400">
+              Клиент также доступен на <span className="text-blue-400">Linux</span> и <span className="text-blue-400">MacOS</span>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Tabs defaultValue="news" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="news">Новости</TabsTrigger>
-            <TabsTrigger value="rules">Правила</TabsTrigger>
-            <TabsTrigger value="shop">Магазин</TabsTrigger>
-            <TabsTrigger value="stats">Рейтинги</TabsTrigger>
-            <TabsTrigger value="register">Регистрация</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="news" className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {news.map((item, index) => (
-                <Card key={index} className="hover-scale">
-                  <CardHeader>
-                    <CardTitle className="text-minecraft-blue">{item.title}</CardTitle>
-                    <CardDescription>{item.date}</CardDescription>
+        {/* Servers Section */}
+        <section className="py-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-3xl font-bold text-white text-center mb-12">Наши серверы</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {servers.map((server, index) => (
+                <Card key={index} className="bg-slate-800/80 border-slate-700 hover:bg-slate-800/90 transition-all hover-scale">
+                  <CardHeader className="pb-3">
+                    <div className="flex justify-between items-start">
+                      <CardTitle className="text-white text-lg">{server.name}</CardTitle>
+                      <Badge 
+                        variant={server.status === 'online' ? 'default' : 'secondary'} 
+                        className={server.status === 'online' ? 'bg-green-600 text-white' : 'bg-red-600 text-white'}
+                      >
+                        {server.status === 'online' ? 'Онлайн' : 'ТО'}
+                      </Badge>
+                    </div>
+                    <p className="text-slate-400 text-sm">{server.version}</p>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-minecraft-darkgray">{item.excerpt}</p>
-                    <Button variant="ghost" className="mt-4 text-minecraft-green p-0">
+                    <div className="flex justify-between items-center">
+                      <span className="text-slate-400">Игроков:</span>
+                      <span className="text-white font-semibold">{server.online}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-16 bg-slate-800/30">
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-3xl font-bold text-white text-center mb-12">Возможности</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {features.map((feature, index) => (
+                <Card key={index} className="bg-slate-800/80 border-slate-700 text-center hover:bg-slate-800/90 transition-all hover-scale">
+                  <CardHeader>
+                    <div className="w-16 h-16 bg-red-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Icon name={feature.icon as any} size={32} className="text-red-500" />
+                    </div>
+                    <CardTitle className="text-white">{feature.title}</CardTitle>
+                    <CardDescription className="text-slate-400">{feature.desc}</CardDescription>
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* News Section */}
+        <section className="py-16">
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-3xl font-bold text-white text-center mb-12">Новости</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {news.map((item, index) => (
+                <Card key={index} className="bg-slate-800/80 border-slate-700 hover:bg-slate-800/90 transition-all hover-scale">
+                  <CardHeader>
+                    <CardTitle className="text-white text-lg leading-tight">{item.title}</CardTitle>
+                    <CardDescription className="text-red-400">{item.date}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-slate-300 text-sm mb-4">{item.excerpt}</p>
+                    <Button variant="ghost" className="text-red-400 hover:text-red-300 p-0">
                       Читать далее →
                     </Button>
                   </CardContent>
                 </Card>
               ))}
             </div>
-          </TabsContent>
-
-          <TabsContent value="rules" className="mt-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-minecraft-blue flex items-center">
-                  <Icon name="Shield" size={24} className="mr-2 text-minecraft-green" />
-                  Правила сервера
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h3 className="font-semibold text-minecraft-blue mb-3">Основные правила</h3>
-                    <ul className="space-y-2 text-minecraft-darkgray">
-                      <li className="flex items-start">
-                        <Icon name="Check" size={16} className="mr-2 text-minecraft-green mt-1 flex-shrink-0" />
-                        Уважайте других игроков
-                      </li>
-                      <li className="flex items-start">
-                        <Icon name="Check" size={16} className="mr-2 text-minecraft-green mt-1 flex-shrink-0" />
-                        Запрещён читинг и баги
-                      </li>
-                      <li className="flex items-start">
-                        <Icon name="Check" size={16} className="mr-2 text-minecraft-green mt-1 flex-shrink-0" />
-                        Не спамьте в чате
-                      </li>
-                      <li className="flex items-start">
-                        <Icon name="Check" size={16} className="mr-2 text-minecraft-green mt-1 flex-shrink-0" />
-                        Стройте красиво
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-minecraft-blue mb-3">Наказания</h3>
-                    <ul className="space-y-2 text-minecraft-darkgray">
-                      <li className="flex items-start">
-                        <Icon name="AlertTriangle" size={16} className="mr-2 text-yellow-500 mt-1 flex-shrink-0" />
-                        Мут за спам: 30 минут
-                      </li>
-                      <li className="flex items-start">
-                        <Icon name="AlertTriangle" size={16} className="mr-2 text-yellow-500 mt-1 flex-shrink-0" />
-                        Кик за нарушения: предупреждение
-                      </li>
-                      <li className="flex items-start">
-                        <Icon name="X" size={16} className="mr-2 text-red-500 mt-1 flex-shrink-0" />
-                        Бан за читы: навсегда
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="shop" className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {shopItems.map((item, index) => (
-                <Card key={index} className="hover-scale">
-                  <CardHeader>
-                    <CardTitle className="text-minecraft-blue">{item.name}</CardTitle>
-                    <CardDescription>{item.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-minecraft-green mb-4">
-                      {item.price}₽
-                    </div>
-                    <Button className="w-full bg-minecraft-green hover:bg-minecraft-green/90 text-white">
-                      <Icon name="ShoppingCart" size={16} className="mr-2" />
-                      Купить
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </TabsContent>
-
-          <TabsContent value="stats" className="mt-8">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-minecraft-blue flex items-center">
-                  <Icon name="Trophy" size={24} className="mr-2 text-minecraft-green" />
-                  Топ игроков
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {topPlayers.map((player, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 bg-minecraft-gray rounded-lg hover-scale">
-                      <div className="flex items-center space-x-4">
-                        <Badge className="bg-minecraft-green text-white w-8 h-8 rounded-full flex items-center justify-center">
-                          {index + 1}
-                        </Badge>
-                        <div>
-                          <div className="font-semibold text-minecraft-blue">{player.name}</div>
-                          <div className="text-sm text-minecraft-darkgray">Уровень {player.level}</div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="font-semibold text-minecraft-green">{player.coins.toLocaleString()}</div>
-                        <div className="text-sm text-minecraft-darkgray">монет</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="register" className="mt-8">
-            <div className="max-w-md mx-auto">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-minecraft-blue flex items-center justify-center">
-                    <Icon name="UserPlus" size={24} className="mr-2 text-minecraft-green" />
-                    Регистрация
-                  </CardTitle>
-                  <CardDescription className="text-center">
-                    Создайте аккаунт для игры на сервере
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <Label htmlFor="username">Никнейм</Label>
-                    <Input 
-                      id="username" 
-                      placeholder="Введите никнейм"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="your@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <Button className="w-full bg-minecraft-green hover:bg-minecraft-green/90 text-white">
-                    <Icon name="UserPlus" size={16} className="mr-2" />
-                    Зарегистрироваться
-                  </Button>
-                  <p className="text-sm text-minecraft-darkgray text-center">
-                    После регистрации вам на email придут инструкции для входа
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
-
-      {/* Stats Bar */}
-      <section className="bg-white border-t">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-minecraft-green">1,247</div>
-              <div className="text-minecraft-darkgray">Игроков онлайн</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-minecraft-green">15,892</div>
-              <div className="text-minecraft-darkgray">Зарегистрировано</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-minecraft-green">99.9%</div>
-              <div className="text-minecraft-darkgray">Время работы</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-minecraft-green">24/7</div>
-              <div className="text-minecraft-darkgray">Техподдержка</div>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <footer className="bg-minecraft-blue text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">CRAFTWORLD</h3>
-              <p className="text-white/80">
-                Лучший Minecraft сервер с уникальными возможностями и дружелюбным сообществом.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Быстрые ссылки</h4>
-              <ul className="space-y-2 text-white/80">
-                <li><a href="#" className="hover:text-minecraft-green transition-colors">Форум</a></li>
-                <li><a href="#" className="hover:text-minecraft-green transition-colors">Поддержка</a></li>
-                <li><a href="#" className="hover:text-minecraft-green transition-colors">Discord</a></li>
-                <li><a href="#" className="hover:text-minecraft-green transition-colors">VK</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Подключение</h4>
-              <p className="text-white/80 mb-2">IP сервера:</p>
-              <code className="bg-minecraft-darkgray px-3 py-1 rounded text-minecraft-green">
-                craftworld.server.com
+        {/* Connect Section */}
+        <section className="py-16 bg-slate-800/30">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold text-white mb-8">Как подключиться</h2>
+            
+            <div className="bg-slate-800/80 rounded-xl p-8 border border-slate-700">
+              <div className="text-slate-400 mb-4">IP адрес сервера:</div>
+              <code className="text-2xl font-mono text-red-400 bg-slate-900/50 px-6 py-3 rounded-lg">
+                mcground.ru
               </code>
-              <p className="text-white/80 mt-4 text-sm">Версия: 1.20.x</p>
+              <div className="text-slate-400 mt-6">
+                Версия Minecraft: <span className="text-white">1.20.4</span>
+              </div>
             </div>
           </div>
-          <div className="border-t border-white/20 mt-8 pt-8 text-center text-white/60">
-            <p>&copy; 2024 CraftWorld Server. Все права защищены.</p>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-slate-700/50 bg-slate-900/80 py-12">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center">
+                    <Icon name="Gamepad2" size={20} className="text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white">McGround</h3>
+                </div>
+                <p className="text-slate-400">
+                  Лучший игровой опыт в Minecraft с уникальными возможностями.
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="text-white font-semibold mb-4">Сообщество</h4>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-slate-400 hover:text-red-400 transition-colors">Discord</a></li>
+                  <li><a href="#" className="text-slate-400 hover:text-red-400 transition-colors">Telegram</a></li>
+                  <li><a href="#" className="text-slate-400 hover:text-red-400 transition-colors">VK</a></li>
+                  <li><a href="#" className="text-slate-400 hover:text-red-400 transition-colors">YouTube</a></li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="text-white font-semibold mb-4">Поддержка</h4>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-slate-400 hover:text-red-400 transition-colors">Правила</a></li>
+                  <li><a href="#" className="text-slate-400 hover:text-red-400 transition-colors">Помощь</a></li>
+                  <li><a href="#" className="text-slate-400 hover:text-red-400 transition-colors">Донат</a></li>
+                  <li><a href="#" className="text-slate-400 hover:text-red-400 transition-colors">Форум</a></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div className="border-t border-slate-700/50 mt-12 pt-8 text-center">
+              <p className="text-slate-500">&copy; 2024 McGround. Все права защищены.</p>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </div>
   )
 }
