@@ -52,6 +52,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				minecraft: {
+					green: '#00D4AA',
+					darkgreen: '#2563EB', 
+					blue: '#1F2937',
+					gray: '#F3F4F6',
+					darkgray: '#374151',
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
